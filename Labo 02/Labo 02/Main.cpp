@@ -83,14 +83,40 @@ void prog()
 		return;
 	}
 
-   	int taille_str = commande.length();
-    int pos_eg = commande.find_last_of("=");
+	int i;
+	tmp = "";
+	for (i = 0; i < commande.length(); i++)
+	{
+		if (commande[i] == '+' || commande[i] == '-' || commande[i] == '=')
+		{
+			if (tmp.find("x2"))
+			{
+				x2 = decodage(tmp);
+			}
+			else if ( tmp.find("x"))
+			{
+				x = decodage(tmp);
+			}
+			else
+			{
+				c = decodage(tmp);
+			}
+			tmp = ""; 
+		}
+		else
+		{
+			tmp += commande[i];
+		}
+	}
+
+   	//int taille_str = commande.length();
+    //int pos_eg = commande.find_last_of("=");
 
 	/*Recherche des coefficient*/
 
-	int pos_x = commande.find_first_of("x");
+	//int pos_x = commande.find_first_of("x");
 
-	tmp = commande.substr(0, pos_x);
+	//tmp = commande.substr(0, pos_x);
 	stoi(commande);
 }
 string enlever_espace( string chaine1)
