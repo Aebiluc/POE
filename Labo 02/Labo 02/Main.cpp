@@ -78,7 +78,10 @@ void prog()
 	commande = enlever_espace(commande);
 
 	if (verif(commande) == -1)
+	{
+		cout << "Une commande est incorrect dans la chaine" << endl;
 		return;
+	}
 
    	int taille_str = commande.length();
     int pos_eg = commande.find_last_of("=");
@@ -115,8 +118,18 @@ int verif(string chaine)
 	int retour;
 	for (i = 0; i < chaine.length(); i++)
 	{
-		if (isdigit(chaine[i]) == 0 || chaine[i] !=  
+		if (isdigit(chaine[i]) != 0 || 
+					chaine[i] == '+' || 
+					chaine[i] == '-' || 
+					chaine[i] == 'x' || 
+					chaine[i] == '=')
+		{
+			continue;
+		}
+		else
+		{
+			return -1;
+		}
 	}
-	 
 	return 0;
 }
