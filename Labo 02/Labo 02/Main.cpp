@@ -23,6 +23,8 @@ using namespace std;
 void prog();
 string enlever_espace(string chaine1);
 int verif(string chaine);
+int decodage(string chaine, int &x2,int &x,int c);
+int signe(string chaine);
 
 int Menu(void);
 /*----------------------------------------------------------------------------*/
@@ -68,9 +70,9 @@ int Menu(void)
 }
 void prog()
 {
-	string commande, tmp;
+	string commande;
 
-	int x, x2, c; 
+	int x=0, x2=0, c=0; 
 
 	cout << "Rentrer un polynome sous la forme \
 	       \nAx + B = 0 ou Ax2 + Bx + C = 0" << endl;
@@ -82,33 +84,8 @@ void prog()
 		cout << "Une commande est incorrect dans la chaine" << endl;
 		return;
 	}
-
-	int i;
-	tmp = "";
-	for (i = 0; i < commande.length(); i++)
-	{
-		if (commande[i] == '+' || commande[i] == '-' || commande[i] == '=')
-		{
-			if (tmp.find("x2"))
-			{
-				x2 = decodage(tmp);
-			}
-			else if ( tmp.find("x"))
-			{
-				x = decodage(tmp);
-			}
-			else
-			{
-				c = decodage(tmp);
-			}
-			tmp = ""; 
-		}
-		else
-		{
-			tmp += commande[i];
-		}
-	}
-
+	
+	decodage(commande, x2, x, c);
    	//int taille_str = commande.length();
     //int pos_eg = commande.find_last_of("=");
 
@@ -133,8 +110,52 @@ string enlever_espace( string chaine1)
 	return ChaineSansEspace;
 }
 
-int decodage(string chaine)
+int decodage(string chaine,int &x2,int &x, int c)
 {
+	int i, pos;
+	string tmp = "";
+
+	for (i = 0; i < chaine.length(); i++)
+	{
+		if (chaine[i] == '+' || 
+			chaine[i] == '-' || 
+			chaine[i] == '=' /*|| 
+			( tmp != "" && i == chaine.length())*/)
+		{
+			if ((pos = tmp.find("x2",0)) >= 0 )
+			{
+				tmp.erase(pos,2);
+				//x2 = signe(tmp);
+				x2 = stoi(tmp);
+				tmp = chaine[i];
+			}
+			else if ((pos = tmp.find("x",0)) >= 0)
+			{
+				tmp.erase(pos, 1);
+				//x = signe(tmp);
+				x = stoi(tmp);
+				tmp = chaine[i];
+			}
+			else
+			{
+				if (i > 1)
+				{
+					//c = signe(tmp);
+					c = stoi(tmp);
+					tmp = chaine[i];
+				}
+				else
+				{
+					tmp += chaine[i];
+				}
+			}
+		}
+		else
+		{
+			tmp += chaine[i];
+		}
+	}
+
 	return 0;
 }
 
@@ -158,4 +179,23 @@ int verif(string chaine)
 		}
 	}
 	return 0;
+}
+
+int signe(string chaine)
+{
+	int pos;
+	if ((pos = chaine.find("-", 0)) >= 0)
+	{
+		return -1;
+		chaine.erase(pos, 1);
+	}
+	else if ((pos = chaine.find("+", 0)) >= 0)
+	{
+		return 1;
+		chaine.erase(pos, 1);
+	}
+	else
+	{
+		return 1;
+	}
 }
