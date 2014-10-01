@@ -17,15 +17,18 @@
 # include <cstdlib>
 # include <iostream>
 # include <string>
-#include  <iomanip>
+# include <iomanip>
+# include <math.h>
 
 using namespace std;
 void prog();
 string enlever_espace(string chaine1);
 int verif(string chaine);
-int decodage(string chaine, int &x2,int &x,int c);
+int decodage(string chaine, int &x2,int &x,int &c);
 int signe(string chaine);
 
+int resolution(int x2, int x, int c, double &resultat1, double &resultat2);
+int resolution(int x, int c, double &resultat);
 int Menu(void);
 /*----------------------------------------------------------------------------*/
 int main(void)
@@ -86,15 +89,22 @@ void prog()
 	}
 	
 	decodage(commande, x2, x, c);
-   	//int taille_str = commande.length();
-    //int pos_eg = commande.find_last_of("=");
+   	
+	if (x2 >= 1)
+	{
+		cout << "aucune valeur pour le moment" << endl;
+	}
+	else if (x >= 1)
+	{
+		double resultat;
+		resolution(x, c, resultat);
+		cout << "x vaut : " << resultat << endl;
 
-	/*Recherche des coefficient*/
-
-	//int pos_x = commande.find_first_of("x");
-
-	//tmp = commande.substr(0, pos_x);
-	stoi(commande);
+	}
+	else
+	{
+		cout << "Pas de x trouvé dans la chaine" << endl;
+	}
 }
 string enlever_espace( string chaine1)
 {
@@ -110,9 +120,10 @@ string enlever_espace( string chaine1)
 	return ChaineSansEspace;
 }
 
-int decodage(string chaine,int &x2,int &x, int c)
+int decodage(string chaine,int &x2,int &x, int &c)
 {
-	int i, pos;
+	unsigned int i;
+	int pos;
 	string tmp = "";
 
 	for (i = 0; i < chaine.length(); i++)
@@ -161,7 +172,7 @@ int decodage(string chaine,int &x2,int &x, int c)
 
 int verif(string chaine)
 {
-	int i;
+	unsigned int i;
 	int retour;
 	for (i = 0; i < chaine.length(); i++)
 	{
@@ -181,21 +192,22 @@ int verif(string chaine)
 	return 0;
 }
 
-int signe(string chaine)
+int resolution(int x, int c, double &resultat)
 {
-	int pos;
-	if ((pos = chaine.find("-", 0)) >= 0)
+	if (c != 0)
 	{
-		return -1;
-		chaine.erase(pos, 1);
+		c = c *-1;
+		resultat = (double)c / (double)x;
+		return 0;
 	}
-	else if ((pos = chaine.find("+", 0)) >= 0)
+	return 1;
+}	
+
+int resolution(int a, int b, int c, double &resultat1, double &resultat2)
+{
+	if (pow(b, 2) - 4 * a*c)
 	{
-		return 1;
-		chaine.erase(pos, 1);
+		;
 	}
-	else
-	{
-		return 1;
-	}
+	return 0;
 }
