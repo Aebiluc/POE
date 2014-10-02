@@ -1,8 +1,8 @@
 /* Fichier : Main.c
 * Auteur  : Luc Aebischer
-* Date    : 18.09.2014
+* Date    : 2.10.2014
 *
-* But     : Mini dictionnaire
+* But     : Analyse de polynome
 *
 *
 * Remarque(s) :
@@ -144,7 +144,7 @@ int decodage(string chaine,int &x2,int &x, int &c)
 	int fin_chaine = 0;
 	string tmp = "";
 	c = 0;
-	/*for (i = 0; i < chaine.length(); i++)*/
+	
 	while (i < chaine.length() || fin_chaine)
 	{
 		if (chaine[i] == '+' || 
