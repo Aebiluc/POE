@@ -121,6 +121,7 @@ void prog()
 	{
 		cout << "Pas de x trouvé dans la chaine" << endl;
 	}
+	cout << endl << endl;
 }
 string enlever_espace( string chaine1)
 {
@@ -167,8 +168,17 @@ int decodage(string chaine,int &x2,int &x, int &c)
 			{
 				if (i > 1 && tmp != "")
 				{
-					c += stoi(tmp);
+					if ((pos = tmp.find("=", 0)) >= 0)
+					{
+						tmp.erase(pos, 1);
+						c -= stoi(tmp);
+					}
+					else
+					{
+						c += stoi(tmp);
+					}
 					tmp = chaine[i];
+					fin_chaine = 0;
 				}
 				else //Signe au tout début de la chaine 
 				{
@@ -179,7 +189,7 @@ int decodage(string chaine,int &x2,int &x, int &c)
 		else
 		{
 			tmp += chaine[i];
-			if (i == chaine.length())
+			if (i == chaine.length()-1)
 				fin_chaine = 1;
 		}
 
