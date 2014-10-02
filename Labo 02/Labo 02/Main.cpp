@@ -97,9 +97,14 @@ void prog()
 	else if (x >= 1)
 	{
 		double resultat;
-		resolution(x, c, resultat);
-		cout << "x vaut : " << resultat << endl;
-
+		if (resolution(x, c, resultat) == 0)
+		{
+			cout << "x vaut : " << resultat << endl;
+		}
+		else
+		{
+			cout << "Erreur de divion par zero" << endl;
+		}
 	}
 	else
 	{
