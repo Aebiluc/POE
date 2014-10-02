@@ -138,40 +138,39 @@ string enlever_espace( string chaine1)
 
 int decodage(string chaine,int &x2,int &x, int &c)
 {
-	unsigned int i;
+	int i = 0;
 	int pos;
+	int fin_chaine = 0;
 	string tmp = "";
-
-	for (i = 0; i < chaine.length(); i++)
+	c = 0;
+	/*for (i = 0; i < chaine.length(); i++)*/
+	while (i < chaine.length() || fin_chaine)
 	{
 		if (chaine[i] == '+' || 
 			chaine[i] == '-' || 
-			chaine[i] == '=' /*|| 
-			( tmp != "" && i == chaine.length())*/)
+			chaine[i] == '=' ||
+			fin_chaine == 1)
 		{
 			if ((pos = tmp.find("x2",0)) >= 0 )
 			{
 				tmp.erase(pos,2);
-				//x2 = signe(tmp);
 				x2 = stoi(tmp);
 				tmp = chaine[i];
 			}
 			else if ((pos = tmp.find("x",0)) >= 0)
 			{
 				tmp.erase(pos, 1);
-				//x = signe(tmp);
 				x = stoi(tmp);
 				tmp = chaine[i];
 			}
 			else
 			{
-				if (i > 1)
+				if (i > 1 && tmp != "")
 				{
-					//c = signe(tmp);
-					c = stoi(tmp);
+					c += stoi(tmp);
 					tmp = chaine[i];
 				}
-				else
+				else //Signe au tout début de la chaine 
 				{
 					tmp += chaine[i];
 				}
@@ -180,7 +179,12 @@ int decodage(string chaine,int &x2,int &x, int &c)
 		else
 		{
 			tmp += chaine[i];
+			if (i == chaine.length())
+				fin_chaine = 1;
 		}
+
+		if (!fin_chaine)
+			i++;
 	}
 
 	return 0;
