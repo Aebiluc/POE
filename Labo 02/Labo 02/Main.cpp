@@ -90,11 +90,22 @@ void prog()
 	
 	decodage(commande, x2, x, c);
    	
-	if (x2 >= 1)
+	if (x2 != 0)
 	{
-		cout << "aucune valeur pour le moment" << endl;
+		double resultat1, resultat2;
+		int retour = resolution(x2, x, c, resultat1, resultat2);
+
+		if (retour == 0)
+		{
+			cout << "x1 vaut : " << resultat1 << endl;
+			cout << "x2 vaut : " << resultat2 << endl;
+		}
+		else
+		{
+			cout << "Impossible ! resolution dans les complexes" << endl;
+		}
 	}
-	else if (x >= 1)
+	else if (x != 0)
 	{
 		double resultat;
 		if (resolution(x, c, resultat) == 0)
@@ -210,9 +221,15 @@ int resolution(int x, int c, double &resultat)
 
 int resolution(int a, int b, int c, double &resultat1, double &resultat2)
 {
-	if (pow(b, 2) - 4 * a*c)
+	double racine;
+
+	if ((racine = pow(b, 2) - 4*a*c) < 0)
 	{
-		;
+		return 1;
 	}
+
+	resultat1 = ((double)(-b) + sqrt(racine)) / (2 * (double)a);
+	resultat2 = ((double)(-b) - sqrt(racine)) / (2 * (double)a);
+
 	return 0;
 }
