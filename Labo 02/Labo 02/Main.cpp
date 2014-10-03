@@ -154,13 +154,20 @@ int decodage(string chaine,int &x2,int &x, int &c)
 		{
 			if ((pos = tmp.find("x2",0)) >= 0 )
 			{
-				tmp.erase(pos,2);
+				tmp.erase(pos, 2);
+				if (tmp == "+" || tmp == "-" || tmp == "")
+					tmp.append("1");
+
 				x2 = stoi(tmp);
+			
 				tmp = chaine[i];
 			}
 			else if ((pos = tmp.find("x",0)) >= 0)
 			{
 				tmp.erase(pos, 1);
+				if (tmp == "+" || tmp == "-" || tmp == "")
+					tmp.append("1");
+
 				x = stoi(tmp);
 				tmp = chaine[i];
 			}
@@ -171,7 +178,9 @@ int decodage(string chaine,int &x2,int &x, int &c)
 					if ((pos = tmp.find("=", 0)) >= 0)
 					{
 						tmp.erase(pos, 1);
-						c -= stoi(tmp);
+
+						if (tmp != "")
+							c -= stoi(tmp);
 					}
 					else
 					{
