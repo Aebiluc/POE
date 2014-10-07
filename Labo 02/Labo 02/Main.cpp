@@ -78,7 +78,7 @@ void prog()
 	int x=0, x2=0, c=0; 
 
 	cout << "Rentrer un polynome sous la forme \
-	       \nAx + B = 0 ou Ax2 + Bx + C = 0" << endl;
+	       \nAx + B = 0 ou Ax2 + Bx + C = D" << endl;
 	getline(cin, commande);
 	commande = enlever_espace(commande);
 
