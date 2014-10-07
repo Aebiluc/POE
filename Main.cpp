@@ -1,8 +1,8 @@
-/* Fichier : Main.c
+/* Fichier : Main.cpp
 * Auteur  : Luc Aebischer
 * Date    : 18.09.2014
 *
-* But     : Mini dictionnaire
+* But     : 
 *
 *
 * Remarque(s) :
