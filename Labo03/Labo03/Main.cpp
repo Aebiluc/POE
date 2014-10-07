@@ -75,14 +75,15 @@ void afficher_cercle(Cercle a)
 {
 	double x, y;
 	a.getCenter(x,y);
-	cout << "Centre(" << x << "," << y << ") de rayon " << a.getRayon() << endl;
+	cout << "Centre(" << x << "," << y << ") de rayon " << a.getRayon() << " de surface " << a.Surface() << endl;
 }
 /*----------------------------------------------------------------------------*/
 int main(void)
 {
 
 	rectangle a,b(2,5);
-	Cercle c, d;
+	Cercle c(1,1,3);
+	double x = -1, y = -1;
 	cout << "Labo 3 \n";
 	cout << "Luc Aebischer\n\n";
 	
@@ -92,7 +93,16 @@ int main(void)
 	b.setLongeur(4);
 	afficher_rectangle(b);
 
+	afficher_cercle(c);
 
+	if (c.estInterieur(x, y))
+	{
+		cout << "Le point (" << x << ", " << y << ") est a l'interieur du cercle" << endl;
+	}
+	else
+	{
+		cout << "Le point (" << x << ", " << y << ") est a l'exterieur du cercle" << endl;
+	}
 	
 	
 	system("PAUSE");

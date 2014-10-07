@@ -26,6 +26,16 @@ void Cercle::getCenter(double &x , double &y)
 
 int Cercle::estInterieur(double x, double y)
 {
+	double module;
+	x = this->x - x;
+	y = this->y - y;
+	module = sqrt(pow(x, 2) + pow(y, 2));
+
+	if (module < rayon)
+	{
+		return 1;
+	}
+
 	return 0;
 }
 
