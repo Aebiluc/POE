@@ -115,7 +115,9 @@ int main(void)
 	settextstyle(1, 0, 1);
 	setcolor(9);
 	outtextxy(15, 10, "Simulation");
-
+	settextstyle(3, 0, 1);
+	setcolor(7);
+	outtextxy(15, 450, "Presser une touche pour quitter");
 
 	// Dessin le soleil
 	setcolor(14);
