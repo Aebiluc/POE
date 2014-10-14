@@ -24,7 +24,8 @@ using namespace std;
 class Planet
 {
 private:
-
+	int maxX, maxY, rayon;
+	double deplacement;
 
 public:
 
@@ -33,24 +34,45 @@ public:
 	static const int X_MIDDLE = X_WINDOS_SIZE / 2;
 	static const int Y_MIDDLE = Y_WINDOS_SIZE / 2;
 	static const int DEGRE_MAX = 360;
+
+	Planet::Planet(int x, int y, int ray, double dep);
+
+	void Planet::Show();
+	void Planet::ShowOrbit();
+
 };
 
 /*************************************************************************/
 //-----------------------------  Planet( )  -----------------------------//
 /*************************************************************************/
 
+Planet::Planet(int x, int y, int ray, double dep)
+{
+	maxX = x;
+	maxY = y;
+	rayon = ray;
+	deplacement = dep;
+	ShowOrbit();
+	Show();
+}
 
 
 /*************************************************************************/
 //----------------------------  ShowOrbit( )  ---------------------------//
 /*************************************************************************/
-
+void Planet::ShowOrbit()
+{
+	ellipse(X_MIDDLE, Y_MIDDLE, 0, DEGRE_MAX, maxX, maxY);
+}
 
 
 /*************************************************************************/
 //--------------------------------  Show( )  ----------------------------//
 /*************************************************************************/
-
+void Planet::Show()
+{
+	pieslice(X_MIDDLE + maxX , Y_MIDDLE, 0, DEGRE_MAX, rayon);
+}
 
 
 /*************************************************************************/
@@ -108,7 +130,7 @@ int main(void)
 	int i, couleur = 14;
 	for (i = 0; i < NB_ETOILE; i++)
 	{
-		putpixel(rand() % 640, rand() % 480, rand() % 14);
+		putpixel(rand() % Planet::X_WINDOS_SIZE, rand() % Planet::Y_WINDOS_SIZE, rand() % 14);
 	}
 
 	// Ecrit quelques textes dans la fenêtre
@@ -131,6 +153,26 @@ int main(void)
 
 	// crée les planètes
 
+	Planet Mercury(50, 30, 8, 0.0175);
+	Planet Venus(80, 55, 8, 0.0155);
+	Planet Earth(110, 80, 8, 0.0135);
+	Planet Mars(140, 105, 8, 0.0115);
+	Planet Jupiter(170, 130, 8, 0.0095);
+	Planet Saturn(200, 155, 8, 0.0075);
+	Planet Uranus(230, 180, 8, 0.0055);
+	Planet Neptune(60, 205, 8, 0.0035);
+	Planet Pluto(290, 230, 8, 0.0015);
+
+	/*
+	Mercury.Show();
+	Venus.Show();
+	Earth.Show();
+	Mars.Show();
+	Jupiter.Show();
+	Saturn.Show();
+	Uranus.Show();
+	Neptune.Show();
+	Pluto.Show();*/
 
 	// crée les orbites
 
