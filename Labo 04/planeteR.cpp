@@ -12,7 +12,9 @@ A C++ Program to show the simulation of the Solar System.
 #include <cmath>
 #include <ctime>
 #include "graphics.h"
+#include <time.h>
 
+const int NB_ETOILE = 5000;
 using namespace std;
 
 /*************************************************************************/
@@ -102,7 +104,12 @@ int main(void)
 
 	// Remplir le ciel de 5000 étoiles 
 	// (générer 5000 positions aléatoirement avec des couleurs aléatoires entre 0 et 14
-
+	srand(10);
+	int i, couleur = 14;
+	for (i = 0; i < NB_ETOILE; i++)
+	{
+		putpixel(rand() % 640, rand() % 480, rand() % 14);
+	}
 
 	// Ecrit quelques textes dans la fenêtre
 	settextstyle(1, 0, 1);
